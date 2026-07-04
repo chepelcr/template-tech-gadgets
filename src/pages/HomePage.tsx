@@ -9,6 +9,7 @@ import { parsePageSections, getSectionByType } from '@/lib/pageUtils';
 export default function HomePage() {
   const { data: pageData, isLoading: pageLoading } = useHomePage();
   const { data: theme } = useTheme();
+  const { data: products = [], isLoading } = useProducts();
 
   if (pageLoading) {
     return (
@@ -26,7 +27,6 @@ export default function HomePage() {
   const hero = getSectionByType(sections, 'hero')?.content || {};
   const benefits = getSectionByType(sections, 'benefits')?.content || {};
   const cta = getSectionByType(sections, 'cta')?.content || {};
-  const { data: products = [], isLoading } = useProducts();
   const featuredProducts = products.slice(0, 4);
 
   return (
