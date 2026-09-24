@@ -2,8 +2,24 @@ import { Link, useParams } from 'wouter';
 import { Zap, Check, ShoppingCart, Heart, Share2, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import { useCartStore } from '@/store/cart';
+import { useRouteProduct } from '@/hooks/useRouteProduct';
 
 export default function ProductDetailPage() {
+  // Add the store's real product (the one this route points at) to the cart.
+  const routeProduct = useRouteProduct();
+  const { addToCart, isOpen, toggleCart } = useCartStore();
+  const handleAddToCart = () => {
+    if (!routeProduct) return;
+    addToCart({
+      id: routeProduct.id,
+      name: routeProduct.name,
+      price: routeProduct.price,
+      imageUrl: routeProduct.imageUrl,
+      quantity: 1,
+    });
+    if (!isOpen) toggleCart();
+  };
   const params = useParams();
   const productId = params.id;
 
@@ -125,7 +141,7 @@ export default function ProductDetailPage() {
 
             {/* Actions */}
             <div className="flex items-center space-x-4 mb-8">
-              <button className="flex-1 btn-tech-accent flex items-center justify-center space-x-2">
+              <button className="flex-1 btn-tech-accent flex items-center justify-center space-x-2" onClick={handleAddToCart} disabled={!routeProduct}>
                 <ShoppingCart className="h-5 w-5" />
                 <span>Add to Cart</span>
               </button>

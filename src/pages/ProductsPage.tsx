@@ -5,8 +5,10 @@ import Footer from '../components/layout/Footer';
 import { useProducts, useProductsPage, useTheme } from '@/hooks/useContent';
 import { parsePageSections, getSectionByType } from '@/lib/pageUtils';
 import { DynamicIcon } from '../components/DynamicIcon';
+import { useCartStore } from '@/store/cart';
 
 export default function ProductsPage() {
+  const { addToCart } = useCartStore();
   const { data: products = [], isLoading } = useProducts({ type: 'product' });
   const { data: pageData, isLoading: pageLoading } = useProductsPage();
   const { data: theme } = useTheme();
@@ -155,7 +157,15 @@ export default function ProductsPage() {
                         </p>
                         <div className="flex items-center justify-between">
                           <span className="text-2xl font-bold text-tech-cyan">${product.price}</span>
-                          <button className="px-4 py-2 bg-primary hover:bg-primary/90 rounded-sm text-sm font-medium transition-colors">
+                          <button
+                            className="px-4 py-2 bg-primary hover:bg-primary/90 rounded-sm text-sm font-medium transition-colors"
+                            onClick={(e) => {
+                              // The card is a link; adding must not navigate.
+                              e.preventDefault();
+                              e.stopPropagation();
+                              addToCart({ id: product.id, name: product.name, price: product.price, imageUrl: product.imageUrl });
+                            }}
+                          >
                             Agregar al Carrito
                           </button>
                         </div>
