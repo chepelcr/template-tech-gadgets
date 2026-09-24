@@ -1,5 +1,6 @@
 import { Link } from 'wouter';
-import { Zap, Github, Twitter, Linkedin, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { Zap, Facebook, Instagram, Twitter, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { formatPhone, whatsappPhone, whatsappUrl } from '@chepelcr/tsuru-storefront-sdk';
 import { useContact, useHomePageSections } from '@/hooks/useContent';
 import { useTheme } from '@/hooks/useContent';
 import { useSubdomainContext } from '@/contexts/SubdomainContext';
@@ -11,6 +12,7 @@ export default function Footer() {
   const { data: theme } = useTheme();
   const { data: sections = [] } = useHomePageSections();
   const newsletter = getSectionByType(sections, 'newsletter')?.content || {};
+  const storeWhatsapp = whatsappPhone(contact);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -30,7 +32,7 @@ export default function Footer() {
                 )}
                 <div className="absolute inset-0 bg-tech-cyan/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <span className="font-bold text-lg animated-gradient-text">{organization?.name || 'TechGadgets'}</span>
+              <span className="font-bold text-lg animated-gradient-text">{organization?.name}</span>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
               Your destination for cutting-edge technology and premium electronics.
@@ -38,36 +40,42 @@ export default function Footer() {
             </p>
             {/* Social Links */}
             <div className="flex items-center space-x-3">
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
-                aria-label="GitHub"
-              >
-                <Github className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
-                <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
-                <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
-                <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
-              </a>
+              {contact?.facebookUrl && (
+                <a
+                  href={contact.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
+                  <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                </a>
+              )}
+              {contact?.instagramUrl && (
+                <a
+                  href={contact.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
+                  <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                </a>
+              )}
+              {contact?.twitterUrl && (
+                <a
+                  href={contact.twitterUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-background hover:bg-tech-cyan/20 rounded-sm transition-all group relative"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="h-4 w-4 group-hover:text-tech-cyan transition-colors" />
+                  <div className="absolute inset-0 bg-tech-cyan/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity rounded-full" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -139,22 +147,28 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-foreground">Contáctanos</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-tech-cyan" />
-                <span>123 Tech Street<br />Silicon Valley, CA 94025</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <MessageCircle className="h-4 w-4 flex-shrink-0 text-tech-cyan" />
-                <a href="https://wa.me/+15551234567?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" className="hover:text-tech-cyan transition-colors">
-                  +1 (555) 123-4567
-                </a>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 flex-shrink-0 text-tech-cyan" />
-                <a href="mailto:support@techgadgets.com" className="hover:text-tech-cyan transition-colors">
-                  support@techgadgets.com
-                </a>
-              </li>
+              {contact?.address && (
+                <li className="flex items-start space-x-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-tech-cyan" />
+                  <span>{contact.address}</span>
+                </li>
+              )}
+              {storeWhatsapp && (
+                <li className="flex items-center space-x-2">
+                  <MessageCircle className="h-4 w-4 flex-shrink-0 text-tech-cyan" />
+                  <a href={whatsappUrl(storeWhatsapp, 'Hola, me gustaría obtener más información')} target="_blank" rel="noopener noreferrer" className="hover:text-tech-cyan transition-colors">
+                    {formatPhone(storeWhatsapp)}
+                  </a>
+                </li>
+              )}
+              {contact?.email && (
+                <li className="flex items-center space-x-2">
+                  <Mail className="h-4 w-4 flex-shrink-0 text-tech-cyan" />
+                  <a href={`mailto:${contact.email}`} className="hover:text-tech-cyan transition-colors">
+                    {contact.email}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -183,7 +197,7 @@ export default function Footer() {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              &copy; {currentYear} {organization?.name || 'TechGadgets'}. All rights reserved. Built with cutting-edge technology.
+              &copy; {currentYear} {organization?.name}. All rights reserved. Built with cutting-edge technology.
             </p>
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">
               <Link href="/privacy" className="hover:text-tech-cyan transition-colors">

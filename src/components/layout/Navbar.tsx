@@ -29,7 +29,7 @@ export default function Navbar() {
                 )}
                 <div className="absolute inset-0 bg-tech-cyan/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <h1 className="text-2xl font-bold animated-gradient-text">{organization?.name || 'TechGadgets'}</h1>
+              <h1 className="text-2xl font-bold animated-gradient-text">{organization?.name}</h1>
             </div>
           </Link>
 
