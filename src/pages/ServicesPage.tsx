@@ -5,7 +5,7 @@ import Footer from '../components/layout/Footer';
 import { useProducts } from '@/hooks/useContent';
 
 export default function ServicesPage() {
-  const { data: services = [], isLoading } = useProducts({ isService: true });
+  const { data: services = [], isLoading } = useProducts({ type: 'service' });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
