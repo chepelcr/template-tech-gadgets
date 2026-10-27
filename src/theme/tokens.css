@@ -1,0 +1,68 @@
+/*
+ * Tech Gadgets design tokens — three layers (see DESIGN.md).
+ * 1 primitives → 2 semantic roles → 3 component tokens.
+ * `--brand*` and `--font-display` are set at run time from the store's branding.
+ */
+:root {
+  /* 1 · Primitives — Diseño industrial */
+  --ti-shell: #E6E5E0;
+  --ti-panel: #D3D1CA;
+  --ti-panel-deep: #C4C2BA;
+  --ti-dial: #FAFAF8;
+  --ti-graphite: #2A2C2F;
+  --ti-graphite-lift: #383B3F;
+  --ti-ink: #1B1C1E;
+  --ti-ink-soft: #55585C;
+  --ti-steel-soft: #B9BAB4;
+  --ti-signal: #E5601A;
+  --ti-signal-text: #9C3A0B;
+  --ti-led: #2F8A42;
+  --ti-led-glow: #3C9A4E;
+  --ti-ember: #A3261C;
+
+  /* 2 · Semantic */
+  --surface: var(--ti-shell);
+  --surface-quiet: var(--ti-panel);
+  --surface-raised: var(--ti-dial);
+  --surface-deep: var(--ti-graphite);
+  --surface-deep-raised: var(--ti-graphite-lift);
+  --ink: var(--ti-ink);
+  --ink-soft: var(--ti-ink-soft);
+  --ink-on-deep: var(--ti-dial);
+  --ink-on-deep-soft: var(--ti-steel-soft);
+  --heading: var(--ti-graphite);
+  --rule: color-mix(in srgb, var(--ti-graphite) 16%, transparent);
+  --rule-on-deep: color-mix(in srgb, var(--ti-dial) 16%, transparent);
+  --accent: var(--brand, var(--ti-signal));
+  --accent-ink: var(--brand-ink, var(--ti-ink));
+  --accent-text: var(--brand-text, var(--ti-signal-text));
+  --accent-2: var(--brand-2, var(--ti-graphite));
+  --accent-2-ink: var(--brand-2-ink, var(--ti-dial));
+  --offer: var(--ti-signal-text);
+  --danger: var(--ti-ember);
+  --success: var(--ti-led);
+  --led: var(--ti-led);
+  --focus: var(--ti-signal-text);
+  --focus-on-deep: var(--ti-signal);
+  --scrim: rgb(27 28 30 / 0.55);
+
+  /* 3 · Component */
+  /* No `system-ui`: it detaches combining marks from their letters. */
+  --font-display: "Schibsted Grotesk", "Noto Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-text: "Schibsted Grotesk", "Noto Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius-device: 2.25rem;
+  --radius-frame: 1.25rem;
+  --radius-frame-sm: 0.75rem;
+  --radius-key: 0.625rem;
+  --radius-pill: 999px;
+  --shadow-soft: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 1px 2px rgb(27 28 30 / 0.12), 0 10px 24px -16px rgb(27 28 30 / 0.4);
+  --shadow-lift: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 2px 4px rgb(27 28 30 / 0.14), 0 24px 44px -24px rgb(27 28 30 / 0.5);
+  --shadow-inset: inset 0 1px 3px rgb(27 28 30 / 0.22), inset 0 -1px 0 rgb(255 255 255 / 0.5);
+  --shadow-key: 0 1px 0 rgb(27 28 30 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.4);
+  --tap: 2.75rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --max: 78rem;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-enter: 240ms;
+  --dur-exit: 160ms;
+}

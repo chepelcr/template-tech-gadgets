@@ -1,96 +1,45 @@
-# Tech Gadgets Template
+# Tech Gadgets — storefront template
 
-A sleek, futuristic e-commerce template designed for technology and electronics stores.
+Industrial-design storefront for electronics, accessories and repairs: device
+modules, a spec-sheet catalog (grid or list) and a 3D radio in the hero whose
+knobs follow the pointer. Design plan: [`DESIGN.md`](DESIGN.md).
 
-## Visual Identity
+## How it works
 
-- **Primary Color:** Dark Blue #1e3a8a (trust, innovation, technology)
-- **Secondary Color:** Cyan #06b6d4 (modern, cutting-edge, digital)
-- **Accent Color:** Electric Blue #3b82f6 (vibrant, tech-forward)
-- **Background:** Dark mode by default (Slate-900 #0f172a)
-- **Font:** Roboto (geometric, tech-friendly)
-- **Style:** Sleek, futuristic, high-contrast, minimal
+React 18 + Vite + Tailwind. Everything the store shows is data — branding,
+CMS copy (`home`, `about`, `products`, `contact`), products and services,
+categories, contact — read through `src/core/`, vendored from the monorepo's
+`templates/_core` (do not edit it here). Template code is the design:
+`src/components`, `src/pages`, `src/theme`, `src/scenes`, `src/i18n`.
 
-## Features
+`/config.json`: `{ "mode": "demo", "templateId": … }` shows the template's demo
+rows; a provisioned store gets `{ "mode": "live", "orgId": … }`.
 
-- Dark mode by default (tech aesthetic)
-- Sharp, minimal borders for modern look
-- Tech-inspired iconography
-- High contrast for excellent readability
-- Futuristic animations and effects
-- Product specification displays
-- Gradient text effects
-- Glow effects on interactive elements
-- Grid patterns and scanline effects
+## Pages
+
+`/` · `/products` (`?type=`, `?category=`, `?sale=1`, `?q=`, `?sort=`) ·
+`/products/:id` · `/about` · `/contact` · 404. Old URLs (`/deals`,
+`/services`, `/category/:slug`…) redirect into the catalog.
+
+## Effects
+
+three.js loads only in its own chunk, in view, on capable devices, with
+motion allowed; `?motion=reduce` and `?webgl=0` show the drawing instead.
 
 ## Development
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server (port 3002)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+pnpm install
+pnpm dev        # http://localhost:5173
+pnpm build      # tsc + vite build → dist/
 ```
 
-## Build Output
+Against a local management-be: `TSURU_DEV_API=http://localhost:5000
+VITE_PUBLIC_API_URL=http://localhost:5173 pnpm dev`.
 
-Builds to: `../../dist/templates/tech-gadgets`
+## Deployment
 
-## Template Pages
-
-- **Home Page**: Hero section with categories and featured products
-- **Products Page**: Full product listing with filters and grid/list view
-- **Product Detail**: Comprehensive product page with specs, images, and related products
-- **Cart Page**: Shopping cart with quantity controls, promo codes, and order summary
-- **404 Page**: Custom not found page with tech aesthetic
-
-## Tech Stack
-
-- React 18
-- TypeScript
-- Vite
-- Tailwind CSS
-- Wouter (routing)
-- Lucide React (icons)
-
-## Components
-
-### Layout Components
-- **Navbar**: Responsive navigation with cart, search, mobile menu, and glow effects
-- **Footer**: Multi-column footer with newsletter signup and social links
-
-### UI Components
-- **ProductCard**: Tech-themed product card with hover glow effects and quick add to cart
-- **TechBadge**: Customizable badge component with variants (new, bestseller, sale, limited, etc.)
-
-## Theme Customization
-
-All theme colors and settings are defined in:
-- `src/theme.ts` - TypeScript theme configuration
-- `src/index.css` - CSS custom properties and utility classes
-- `tailwind.config.ts` - Tailwind theme extension
-
-### Custom CSS Classes
-- `.tech-gradient` - Blue to cyan gradient background
-- `.tech-glow` - Cyan glow effect
-- `.tech-glow-hover` - Glow effect on hover
-- `.animated-gradient-text` - Animated gradient text
-- `.grid-pattern` - Subtle grid background
-- `.scanlines` - CRT scanline overlay effect
-- `.btn-tech`, `.btn-tech-secondary`, `.btn-tech-accent` - Tech-styled buttons
-- `.card-tech` - Tech-styled card with hover effects
-
-## Live Demo
-
-**URL:** https://tech-gadgets.examples.tsuru.jcampos.dev
-
-## License
-
-Part of the BeautyMarket multi-template system.
+`.github/workflows/deploy.yml`: `develop` → GitHub Pages
+(`tech-gadgets.examples.tsuru.jcampos.dev`, staging); `main` → production
+example hosting; each deploy notifies the provisioner to refresh stores using
+this template.

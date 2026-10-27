@@ -1,31 +1,33 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+// Local development against a local management-be: TSURU_DEV_API=http://localhost:5000
+// proxies /api there (same origin, so the signed requests need no CORS).
+const devApi = process.env.TSURU_DEV_API;
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          // Vendor chunks for better caching
           'vendor-react': ['react', 'react-dom'],
-          'vendor-router': ['wouter'],
-          'vendor-query': ['@tanstack/react-query'],
-          'vendor-aws': ['aws-amplify'],
-          'vendor-utils': ['clsx', 'tailwind-merge'],
+          'vendor-data': ['@tanstack/react-query', 'wouter', 'zustand'],
+          'vendor-aws': ['aws-amplify', '@chepelcr/tsuru-storefront-sdk'],
         },
       },
     },
   },
   server: {
-    port: 3002,
+    port: 5173,
+    proxy: devApi ? { '/api': { target: devApi, changeOrigin: true } } : undefined,
   },
 });
