@@ -1,285 +1,297 @@
-/**
- * Tech Gadgets Template - Global Styles
- * Dark mode optimized, sleek tech aesthetic
- */
+@import './core/core.css';
+@import './theme/tokens.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* CSS Variables - Tech Gadgets Theme (Dark Mode by Default) */
-  :root {
-    /* Dark mode is the default for tech template */
-    --background: 222.47 47.37% 11.18%; /* Slate-900 #0f172a */
-    --foreground: 210 40% 96.08%; /* Slate-100 #f1f5f9 */
-
-    --card: 215.29 24.62% 26.47%; /* Slate-700 #334155 */
-    --card-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --popover: 217.24 32.56% 17.45%; /* Slate-800 #1e293b */
-    --popover-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --primary: 221.21 83.19% 53.33%; /* Blue-900 #1e3a8a */
-    --primary-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --secondary: 187.85 84.62% 43.14%; /* Cyan-500 #06b6d4 */
-    --secondary-foreground: 222.47 47.37% 11.18%; /* Slate-900 (dark text on cyan) */
-
-    --accent: 217.24 91.22% 59.8%; /* Blue-500 #3b82f6 */
-    --accent-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --muted: 215.4 16.28% 46.86%; /* Slate-600 #475569 */
-    --muted-foreground: 215.4 13.79% 34.12%; /* Slate-500 #64748b */
-
-    --destructive: 0 84.24% 60.2%; /* Red-500 #ef4444 */
-    --destructive-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --border: 215.4 16.28% 46.86%; /* Slate-600 #475569 */
-    --input: 215.4 16.28% 46.86%; /* Slate-600 */
-    --ring: 187.85 84.62% 43.14%; /* Cyan-500 */
-
-    /* Tech-specific colors */
-    --tech-blue: 221.21 83.19% 53.33%; /* Blue-900 #1e3a8a */
-    --tech-cyan: 187.85 84.62% 43.14%; /* Cyan-500 #06b6d4 */
-    --tech-electric: 217.24 91.22% 59.8%; /* Blue-500 #3b82f6 */
-
-    /* Border radius - Sharp, minimal for tech aesthetic */
-    --radius: 0.25rem; /* Smaller, sharper corners */
-  }
-
-  /* Optional light mode (if user toggles) */
-  .light {
-    --background: 0 0% 100%; /* White */
-    --foreground: 222.47 47.37% 11.18%; /* Slate-900 */
-
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 222.47 47.37% 11.18%; /* Slate-900 */
-
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 222.47 47.37% 11.18%; /* Slate-900 */
-
-    --primary: 221.21 83.19% 53.33%; /* Blue-900 */
-    --primary-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --secondary: 187.85 84.62% 43.14%; /* Cyan-500 */
-    --secondary-foreground: 222.47 47.37% 11.18%; /* Slate-900 */
-
-    --accent: 217.24 91.22% 59.8%; /* Blue-500 */
-    --accent-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --muted: 210 40% 96.08%; /* Slate-100 */
-    --muted-foreground: 215.4 16.28% 46.86%; /* Slate-600 */
-
-    --destructive: 0 84.24% 60.2%; /* Red-500 */
-    --destructive-foreground: 210 40% 96.08%; /* Slate-100 */
-
-    --border: 214.32 31.82% 91.37%; /* Slate-200 */
-    --input: 214.32 31.82% 91.37%; /* Slate-200 */
-    --ring: 187.85 84.62% 43.14%; /* Cyan-500 */
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
+  html {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-text);
+    /* Tabular figures only where numbers line up (prices, counts): in this
+       face 'tnum' also widens commas and periods. */
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: 'Roboto', system-ui, sans-serif;
+    margin: 0;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    text-wrap: balance;
   }
 
-  /* Selection color - cyan for tech aesthetic */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .on-deep :focus-visible {
+    outline-color: var(--focus-on-deep);
+  }
+
   ::selection {
-    background-color: hsl(var(--tech-cyan) / 0.3);
-    color: hsl(var(--foreground));
+    background: var(--ti-signal);
+    color: var(--ti-ink);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
   }
 }
 
 @layer components {
-  /* Tech gradient backgrounds */
-  .tech-gradient {
-    background: linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
+  .page {
+    width: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 
-  .tech-gradient-subtle {
-    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  /* Keys: buttons are physical — a shadow edge that presses in. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--tap);
+    padding: 0.625rem 1.125rem;
+    border-radius: var(--radius-key);
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    box-shadow: var(--shadow-key);
+    transition: transform 90ms ease, box-shadow 90ms ease, background-color var(--dur-exit) ease;
   }
 
-  /* Glow effects for tech aesthetic */
-  .tech-glow {
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+  .btn:active:not(:disabled) {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-inset);
   }
 
-  .tech-glow-hover {
-    transition: box-shadow 300ms ease;
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
   }
 
-  .tech-glow-hover:hover {
-    box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-ink);
   }
 
-  /* Sharp, tech-style buttons */
-  .btn-tech {
-    @apply px-6 py-3 rounded-sm font-medium transition-all duration-300;
-    @apply bg-primary text-primary-foreground;
-    @apply hover:opacity-90 hover:shadow-lg;
+  .btn-accent:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--accent) 88%, white);
   }
 
-  .btn-tech-secondary {
-    @apply px-6 py-3 rounded-sm font-medium transition-all duration-300;
-    @apply bg-secondary text-secondary-foreground;
-    @apply hover:opacity-90 hover:shadow-lg;
+  .btn-strong {
+    background: var(--ti-graphite);
+    color: var(--ti-dial);
   }
 
-  .btn-tech-accent {
-    @apply px-6 py-3 rounded-sm font-medium transition-all duration-300;
-    @apply bg-accent text-accent-foreground;
-    @apply hover:opacity-90 tech-glow-hover;
+  .btn-strong:hover:not(:disabled) {
+    background: var(--ti-graphite-lift);
   }
 
-  /* Tech card styles */
-  .card-tech {
-    @apply bg-card border border-border rounded-sm p-6;
-    @apply transition-all duration-300;
-    @apply hover:border-tech-cyan hover:shadow-lg;
+  .btn-quiet {
+    background: var(--ti-dial);
+    color: var(--ti-graphite);
   }
 
-  /* Grid patterns for tech aesthetic */
-  .grid-pattern {
-    background-image:
-      linear-gradient(to right, rgba(71, 85, 105, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(71, 85, 105, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+  .btn-quiet:hover:not(:disabled) {
+    background: white;
   }
 
-  /* Scanline effect (subtle) */
-  .scanlines {
-    position: relative;
+  .btn-on-deep {
+    background: var(--ti-graphite-lift);
+    color: var(--ti-dial);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  }
+
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    border-radius: var(--radius-key);
+  }
+
+  .gloss {
+    display: none;
+  }
+
+  .frame {
+    border-radius: var(--radius-frame);
     overflow: hidden;
   }
 
-  .scanlines::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(6, 182, 212, 0.02) 50%
-    );
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 1;
+  .frame-sm {
+    border-radius: var(--radius-frame-sm);
+    overflow: hidden;
   }
 
-  /* Product spec table styling */
-  .spec-table {
-    @apply w-full border-collapse;
+  /* A module of the device face: panel colour, raised edge. */
+  .module {
+    border-radius: var(--radius-frame);
+    background: var(--surface-quiet);
+    box-shadow: var(--shadow-soft);
   }
 
-  .spec-table th,
-  .spec-table td {
-    @apply border border-border px-4 py-2 text-left;
+  .module-raised {
+    border-radius: var(--radius-frame);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-soft);
   }
 
-  .spec-table th {
-    @apply bg-muted font-semibold;
+  .field {
+    width: 100%;
+    min-height: var(--tap);
+    padding: 0.625rem 0.875rem;
+    border-radius: var(--radius-key);
+    background: var(--ti-dial);
+    color: var(--ink);
+    box-shadow: var(--shadow-inset);
+    font: inherit;
   }
 
-  .spec-table tr:hover {
-    @apply bg-muted opacity-50;
+  .field[aria-invalid='true'] {
+    box-shadow: inset 0 0 0 2px var(--danger);
   }
 
-  /* Responsive container */
-  .container-tech {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Tech section headers */
-  .section-header-tech {
-    @apply text-3xl md:text-4xl font-bold mb-8;
-    @apply bg-gradient-to-r from-tech-blue via-tech-electric to-tech-cyan bg-clip-text text-transparent;
-  }
-}
-
-@layer utilities {
-  /* Animated gradient text */
-  .animated-gradient-text {
-    background: linear-gradient(90deg, #1e3a8a, #06b6d4, #3b82f6, #1e3a8a);
+  .skeleton {
+    background: linear-gradient(100deg, var(--ti-panel) 30%, var(--ti-panel-deep) 50%, var(--ti-panel) 70%);
     background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient-shift 3s ease infinite;
+    animation: skeleton-sweep 1.4s ease-in-out infinite;
+    border-radius: var(--radius-key);
   }
 
-  @keyframes gradient-shift {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+  .skeleton-deep {
+    background: var(--ti-graphite-lift);
+    border-radius: var(--radius-key);
   }
 
-  /* Pulse glow effect */
-  .pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+  /* The price readout: a recessed display window. */
+  .price-tag {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 0.5rem;
+    background: var(--ti-dial);
+    box-shadow: var(--shadow-inset);
+    color: var(--ti-ink);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
   }
 
-  @keyframes pulse-glow {
-    0%, 100% {
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
-    }
-  }
-
-  /* Text shadow for tech headers */
-  .text-tech-shadow {
-    text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-  }
-
-  /* Backdrop blur */
-  .backdrop-tech {
-    backdrop-filter: blur(10px) saturate(180%);
-    background-color: rgba(30, 41, 59, 0.8);
+  .eyebrow-rule {
+    height: 1px;
+    background: var(--rule);
   }
 }
 
-/* Custom scrollbar for dark theme */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+@keyframes skeleton-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+@keyframes key-tap {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(2px);
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
-  border-radius: 4px;
+.basket-settle {
+  animation: key-tap 260ms var(--ease-out);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--tech-cyan));
+@keyframes sheet-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid hsl(var(--tech-cyan));
-  outline-offset: 2px;
+@keyframes sheet-in-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay[data-state='open'] {
+  animation: fade-in var(--dur-enter) ease;
+}
+
+.sheet[data-state='open'] {
+  animation: sheet-in-up var(--dur-enter) var(--ease-out);
+}
+
+@media (min-width: 768px) {
+  .sheet[data-state='open'] {
+    animation-name: sheet-in-right;
+  }
+}
+
+.dialog-pop[data-state='open'] {
+  animation: fade-in var(--dur-enter) var(--ease-out);
+}
+
+/* The LED: lit, dim or off. */
+.led {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+  background: var(--ti-panel-deep);
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 0.25);
+}
+
+.led[data-state='on'] {
+  background: var(--led);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--led) 22%, transparent), 0 0 10px color-mix(in srgb, var(--ti-led-glow) 70%, transparent);
+}
+
+.led[data-state='low'] {
+  background: var(--ti-signal);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--ti-signal) 22%, transparent);
+}
+
+/* Dot grille, for speaker faces drawn in CSS. */
+.grille {
+  background-image: radial-gradient(circle, rgb(27 28 30 / 0.55) 1.4px, transparent 1.6px);
+  background-size: 9px 9px;
 }
