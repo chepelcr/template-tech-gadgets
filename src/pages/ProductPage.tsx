@@ -9,6 +9,7 @@ import { Price } from '@/components/Price';
 import { ProductCard } from '@/components/ProductCard';
 import { QuantityStepper } from '@/components/QuantityStepper';
 import { StoreImage } from '@/components/StoreImage';
+import { SectionError } from '@/components/StoreStates';
 
 export default function ProductPage() {
   const { id } = useParams<{ id: string }>();
@@ -25,6 +26,14 @@ export default function ProductPage() {
           <div className="skeleton h-12 w-3/4" />
           <div className="skeleton h-40 w-full" />
         </div>
+      </div>
+    );
+  }
+
+  if (catalog.isError) {
+    return (
+      <div className="page pt-16">
+        <SectionError title={t('catalog.error.title')} onRetry={catalog.refetch} />
       </div>
     );
   }

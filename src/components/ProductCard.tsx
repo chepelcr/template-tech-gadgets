@@ -30,25 +30,25 @@ export function ProductCard({ item, category, sizes = '(min-width: 1024px) 22vw,
 
   if (layout === 'row') {
     return (
-      <article className={`group relative grid grid-cols-[4rem_1fr] items-center gap-x-4 gap-y-2 rounded-[var(--radius-frame-sm)] px-2 py-3 sm:grid-cols-[4rem_minmax(0,1fr)_10rem_8rem_auto] ${focusRing}`}>
-        <div className="frame-sm row-span-2 aspect-square bg-surface-raised shadow-inset sm:row-span-1">
+      <article className={`group relative grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-x-4 gap-y-2 rounded-[var(--radius-frame-sm)] px-2 py-3 lg:grid-cols-[4rem_minmax(0,1fr)_8rem_8rem_auto] ${focusRing}`}>
+        <div className="frame-sm row-span-2 aspect-square bg-surface-raised shadow-inset lg:row-span-1">
           <StoreImage src={item.imageUrl} alt="" sizes="4rem" maxWidth={400} fallback={<Placeholder />} />
         </div>
         <div className="min-w-0">
-          <Heading className="truncate text-base font-semibold text-heading">{link}</Heading>
+          <Heading title={item.name} className="break-words text-base font-semibold leading-snug text-heading lg:truncate">{link}</Heading>
           <p className="truncate text-sm text-ink-soft">
             {category?.name}
             {item.kind === 'service' && ` · ${t('product.service')}`}
             {item.duration && ` · ${item.duration}`}
           </p>
         </div>
-        <div className="col-start-2 sm:col-start-auto">
+        <div className="col-start-2 lg:col-start-auto">
           <Led item={item} />
         </div>
-        <div className="col-start-2 sm:col-start-auto sm:text-right">
+        <div className="col-start-2 lg:col-start-auto lg:text-right">
           <Price item={item} />
         </div>
-        <div className="relative z-10 col-start-2 sm:col-start-auto">
+        <div className="relative z-10 col-start-2 lg:col-start-auto">
           <AddToCart item={item} variant="compact" tone="quiet" />
         </div>
       </article>

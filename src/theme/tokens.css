@@ -66,3 +66,27 @@
   --dur-enter: 240ms;
   --dur-exit: 160ms;
 }
+
+/* Dark panels use the same industrial edge, with quieter highlights. */
+:root[data-color-scheme='dark'] {
+  --surface: #191B1E;
+  --surface-quiet: #24272B;
+  --surface-raised: #30343A;
+  --surface-deep: #111315;
+  --surface-deep-raised: #25292E;
+  --ink: #F0EFEA;
+  --ink-soft: #C1C4C8;
+  --heading: #F0EFEA;
+  --rule: rgb(240 239 234 / 0.22);
+  --offer: #F5A475;
+  --offer-ink: #1B1C1E;
+  --danger: #FFAAA0;
+  --success: #8ACD96;
+  --led: #69BF7C;
+  --focus: #F5A475;
+  --scrim: rgb(0 0 0 / 0.7);
+  --shadow-soft: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 24px -16px rgb(0 0 0 / 0.7);
+  --shadow-lift: inset 0 1px 0 rgb(255 255 255 / 0.12), 0 2px 4px rgb(0 0 0 / 0.35), 0 24px 44px -24px rgb(0 0 0 / 0.8);
+  --shadow-inset: inset 0 1px 3px rgb(0 0 0 / 0.5), inset 0 -1px 0 rgb(255 255 255 / 0.08);
+  --shadow-key: 0 1px 0 rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
