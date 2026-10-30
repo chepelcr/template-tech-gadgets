@@ -21,7 +21,8 @@
     "react-dom": "^18.3.1",
     "three": "0.186.1",
     "wouter": "^3.10.0",
-    "zustand": "^4.5.0"
+    "zustand": "^4.5.0",
+    "amazon-cognito-identity-js": "^6.3.22"
   },
   "devDependencies": {
     "@types/react": "^18.3.11",
